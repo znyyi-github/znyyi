@@ -17,6 +17,12 @@ importers:
       '@eslint/js':
         specifier: ^9.36.0
         version: 9.39.2
+      cz-git:
+        specifier: ^1.11.1
+        version: 1.12.0
+      czg:
+        specifier: ^1.11.1
+        version: 1.12.0
       eslint:
         specifier: ^10.0.0
         version: 10.0.0(jiti@2.6.1)
@@ -32,6 +38,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
+      tinyglobby:
+        specifier: ^0.2.15
+        version: 0.2.15
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -689,6 +698,15 @@ packages:
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
+
+  cz-git@1.12.0:
+    resolution: {integrity: sha512-LaZ+8whPPUOo6Y0Zy4nIbf6JOleV3ejp41sT6N4RPKiKKA+ICWf4ueeIlxIO8b6JtdlDxRzHH/EcRji07nDxcg==}
+    engines: {node: '>=v12.20.0'}
+
+  czg@1.12.0:
+    resolution: {integrity: sha512-LGltcoZ5m7vhe3WNw16QXqd5WurnHegx9V15MwZJtFAU2AVCYLCqDbwxPUgZOnAcdzzooq33ONcU148HOQsjdA==}
+    engines: {node: '>=v12.20.0'}
+    hasBin: true
 
   dargs@8.1.0:
     resolution: {integrity: sha512-wAV9QHOsNbwnWdNW2FYvE1P56wtgSbM+3SZcdGiWQILwVjACCXDCI3Ai8QlCjMDB8YK5zySiXZYBiwGmNY3lnw==}
@@ -1850,6 +1868,10 @@ snapshots:
       which: 2.0.2
 
   csstype@3.2.3: {}
+
+  cz-git@1.12.0: {}
+
+  czg@1.12.0: {}
 
   dargs@8.1.0: {}
 
