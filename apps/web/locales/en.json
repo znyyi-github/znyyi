@@ -1,0 +1,11 @@
+{
+  "app.text.user_name": "Username",
+  "app.text.user_pwd": "Password",
+  "app.text.user_login": "Login",
+  "app.text.user_register": "Register",
+  "app.text.confirm_login": "Login Now",
+  "app.text.confirm_register": "Register Now",
+  "app.text.reset": "Reset",
+  "app.text.regain_pwd": "Confirm Password",
+  "app.text.none_user": "User not found"
+}
