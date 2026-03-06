@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite-ssg build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@unhead/vue": "^2.1.10",
     "@znyyi/shared": "workspace:*",
     "axios": "^1.13.5",
     "element-plus": "^2.13.2",
@@ -21,11 +22,14 @@
     "@types/node": "^24.10.1",
     "@vitejs/plugin-vue": "^6.0.2",
     "@vue/tsconfig": "^0.8.1",
+    "sass": "^1.97.3",
     "typescript": "~5.9.3",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^31.0.0",
+    "unplugin-vue-router": "^0.19.2",
     "vite": "^7.3.1",
     "vite-plugin-vue-devtools": "^8.0.6",
+    "vite-ssg": "~28.2.0",
     "vue-tsc": "^3.1.5"
   }
 }

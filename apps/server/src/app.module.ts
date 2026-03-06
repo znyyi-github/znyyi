@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { LoginModule } from './modules/user/login.module';
+import { UserModule } from './modules/user/user.module';
 @Module({
   imports: [
     // 加载环境变量（全局生效）
@@ -19,7 +19,7 @@ import { LoginModule } from './modules/user/login.module';
       }),
       inject: [ConfigService], // 注入环境变量服务
     }),
-    LoginModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

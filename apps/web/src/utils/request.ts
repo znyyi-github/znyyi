@@ -3,7 +3,7 @@ import { i18n } from "./i18n";
 import type { ResponseData } from "@znyyi/shared";
 
 export const instance = axios.create({
-  baseURL: "/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 instance.interceptors.request.use();

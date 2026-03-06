@@ -1,12 +1,12 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { LoginService } from './login.service';
+import { UserService } from './user.service';
 import type { LoginQuery } from '@znyyi/shared';
 
-@Controller('login')
-export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+@Controller('user')
+export class UserController {
+  constructor(private readonly loginService: UserService) {}
 
-  @Post()
+  @Post('login')
   login(@Body() query: LoginQuery) {
     return this.loginService.login(query);
   }

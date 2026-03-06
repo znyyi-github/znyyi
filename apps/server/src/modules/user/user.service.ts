@@ -6,7 +6,7 @@ import type { LoginQuery } from '@znyyi/shared';
 import { ResponseDataImpl } from 'src/common/response-data';
 
 @Injectable()
-export class LoginService {
+export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly loginRepository: Repository<UserEntity>,

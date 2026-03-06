@@ -1,15 +1,32 @@
-import { createApp } from "vue";
 import "./style.css";
+import "./font.css";
 import App from "./App.vue";
-import { router } from "./router";
-import { createPinia } from "pinia";
-import { i18n, loadLanguageAsync } from "./utils/i18n";
+import { ViteSSG } from "vite-ssg";
+import { routes } from "vue-router/auto-routes";
+import type { UserModule } from "./types";
 
-const app = createApp(App);
-app.use(router);
-const pinia = createPinia();
-app.use(pinia);
-app.use(i18n);
-loadLanguageAsync("zh-cn").finally(() => {
-  app.mount("#app");
-});
+// const app = createApp(App);
+// app.use(router);
+// const pinia = createPinia();
+// app.use(pinia);
+// app.use(i18n);
+// loadLanguageAsync("zh-cn").finally(() => {
+//   app.mount("#app");
+// });
+
+export const createApp = ViteSSG(
+  App,
+  {
+    routes,
+    base: import.meta.env.BASE_URL,
+  },
+  (ctx) => {
+    // install all modules under `modules/`
+    Object.values(
+      import.meta.glob<{ install: UserModule }>("./modules/*.ts", {
+        eager: true,
+      }),
+    ).forEach((i) => i.install?.(ctx));
+    // ctx.app.use(Previewer)
+  },
+);

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import NavTop from "./layouts/NavTop.vue";
+
 const size = "small";
 const zIndex = 3000;
 </script>
@@ -6,9 +8,10 @@ const zIndex = 3000;
 <template>
   <ElConfigProvider :size="size" :z-index="zIndex">
     <div>
+      <NavTop />
       <RouterView />
     </div>
   </ElConfigProvider>
 </template>
 
-<style scoped></style>
+<style lang="scss"></style>

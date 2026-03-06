@@ -2,11 +2,17 @@
   "app.text.user_name": "用户名",
   "app.text.user_pwd": "密码",
   "app.text.user_login": "用户登录",
+  "app.text.login": "登录",
   "app.text.user_register": "注册账号",
   "app.text.confirm_login": "立即登录",
   "app.text.confirm_register": "立即注册",
   "app.text.reset": "重置",
   "app.text.regain_pwd": "确认密码",
   "app.text.none_user": "用户不存在",
-  "app.text.user_login_success": "登陆成功"
+  "app.text.user_login_success": "登陆成功",
+  "app.text.home": "首页",
+  "app.text.article": "文章",
+  "app.text.message": "留言",
+  "app.text.link": "友链",
+  "app.text.about": "关于"
 }
