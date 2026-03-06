@@ -4,10 +4,10 @@ import type { LoginQuery } from '@znyyi/shared';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly loginService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-  @Post('login')
-  login(@Body() query: LoginQuery) {
-    return this.loginService.login(query);
+  @Post('')
+  xx(@Body() query: LoginQuery) {
+    return this.userService.findUserAndPwd(query);
   }
 }

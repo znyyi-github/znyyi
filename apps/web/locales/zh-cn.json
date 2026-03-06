@@ -14,5 +14,9 @@
   "app.text.article": "文章",
   "app.text.message": "留言",
   "app.text.link": "友链",
-  "app.text.about": "关于"
+  "app.text.about": "关于",
+  "app.text.data_type_error": "数据格式错误",
+  "app.text.uer_exists": "用户名已存在",
+  "app.text.handler.sucess": "操作成功",
+  "app.text.logout.sucess": "退出登录"
 }
