@@ -6,7 +6,7 @@ export interface StoreUserInfo {
   photo: string;
 }
 
-export default defineStore("app", () => {
+export const useAppStore = defineStore("app", () => {
   const userInfo = ref<StoreUserInfo>({
     user: "",
     photo: "",

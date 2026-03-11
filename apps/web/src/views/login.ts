@@ -1,6 +1,6 @@
 import { ref, useTemplateRef } from "vue";
 import { login } from "../api";
-import useAppStore from "../store";
+import { useAppStore } from "../store/app";
 import { useI18n } from "vue-i18n";
 
 export interface LoginEmit {
@@ -24,20 +24,18 @@ export const useLogin = (emit: ReturnType<typeof defineEmits>) => {
       user: loginForm.value.name,
       pwd: loginForm.value.pwd,
     });
-    if (res.code === "0") {
-      ElMessage({
-        message: t(res.message),
-        type: "success",
-        duration: 1000,
-      });
-      closeLoginBox();
-      store.updateUserInfo(res.data);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 1000);
-    }
 
-    console.log(res);
+    ElMessage({
+      message: t(res.message),
+      type: "success",
+      duration: 1000,
+    });
+    closeLoginBox();
+
+    store.updateUserInfo(res.data!);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
   };
   const regSubmit = async () => {};
 

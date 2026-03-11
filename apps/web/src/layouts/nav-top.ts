@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import useAppStore from "../store";
+import { useAppStore } from "../store/app";
 
 export const useNavTop = () => {
   const route = useRoute();

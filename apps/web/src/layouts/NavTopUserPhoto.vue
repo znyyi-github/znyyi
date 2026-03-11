@@ -1,8 +1,6 @@
 <script setup lang="ts">
-useAppStore();
-import useAppStore from "@/store";
+import { useAppStore } from "@/store/app";
 const store = useAppStore();
-const userInfo = store.userInfo;
 
 const changeUserInfo = () => {};
 const logout = () => {};
@@ -20,7 +18,7 @@ const logout = () => {};
         <div
           class="img"
           :style="{
-            backgroundImage: `url(/${userInfo.photo})`,
+            backgroundImage: `url(/${store.userInfo.photo})`,
           }"
         ></div>
       </template>

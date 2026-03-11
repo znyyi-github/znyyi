@@ -8,7 +8,6 @@
   "app.text.confirm_register": "立即注册",
   "app.text.reset": "重置",
   "app.text.regain_pwd": "确认密码",
-  "app.text.none_user": "用户不存在",
   "app.text.user_login_success": "登陆成功",
   "app.text.home": "首页",
   "app.text.article": "文章",
@@ -18,5 +17,7 @@
   "app.text.data_type_error": "数据格式错误",
   "app.text.uer_exists": "用户名已存在",
   "app.text.handler.sucess": "操作成功",
-  "app.text.logout.sucess": "退出登录"
+  "app.text.logout.sucess": "退出登录",
+  "app.text.login_missing_credentials": "用户名或密码不能为空",
+  "app.text.login_failed": "登录失败，请检查账号密码"
 }

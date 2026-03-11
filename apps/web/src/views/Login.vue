@@ -119,7 +119,7 @@ const {
   background: rgba(0, 0, 0, 0.6);
   .main {
     width: 300px;
-    // height: 300px;
+    height: 300px;
     padding: 10px 30px;
     background: #fff;
     position: absolute;

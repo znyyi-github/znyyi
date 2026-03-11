@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Login from "@/views/Login.vue";
-import UserPhoto from "@/components/UserPhoto.vue";
+import UserPhoto from "./NavTopUserPhoto.vue";
 
 import { useNavTop } from "./nav-top";
 const {
@@ -14,62 +14,70 @@ const {
 </script>
 <template>
   <div id="nav-top">
-    <div class="left-logo">
-      <span>znyyi.fun</span>
-    </div>
-    <div class="center-nav">
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        router
-      >
-        <el-menu-item
-          v-for="item in data"
-          :key="item.url"
-          :index="item.url"
-          :route="item.url"
-        >
-          <span class="nav-item">{{ $t(item.name) }}</span>
-        </el-menu-item>
-      </el-menu>
-    </div>
-    <div class="right-nav">
-      <RouterLink class="backend-admin" to="/admin">后台管理</RouterLink>
-
-      <div v-if="userInfo.user" class="user-info">
-        <UserPhoto></UserPhoto>
+    <div class="inner-box">
+      <div class="left-logo">
+        <span>znyyi.fun</span>
       </div>
-      <!-- 登录/注册 -->
-      <el-button
-        v-else
-        class="login-btn"
-        @click="loginBtnClick"
-        type="success"
-        size="small"
-      >
-        {{ $t("app.text.login") }}
-      </el-button>
-    </div>
+      <div class="center-nav">
+        <el-menu
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="horizontal"
+          router
+        >
+          <el-menu-item
+            v-for="item in data"
+            :key="item.url"
+            :index="item.url"
+            :route="item.url"
+          >
+            <span class="nav-item">{{ $t(item.name) }}</span>
+          </el-menu-item>
+        </el-menu>
+      </div>
+      <div class="right-nav">
+        <RouterLink class="backend-admin" to="/admin">后台管理</RouterLink>
 
-    <Login @closeLoginBox="closeLoginBox" v-if="isShowLoginBox"></Login>
+        <div v-if="userInfo.user" class="user-info">
+          <UserPhoto></UserPhoto>
+        </div>
+        <!-- 登录/注册 -->
+        <el-button
+          v-else
+          class="login-btn"
+          @click="loginBtnClick"
+          type="success"
+          size="small"
+        >
+          {{ $t("app.text.login") }}
+        </el-button>
+      </div>
+
+      <Login @closeLoginBox="closeLoginBox" v-if="isShowLoginBox"></Login>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 #nav-top {
   width: 100%;
-  height: 50px;
-  line-height: 50px;
   position: fixed;
+  top: 0;
   z-index: 99;
   box-shadow: 0 0 5px #777;
-  display: flex;
-  justify-content: space-between;
   @media screen and (max-width: 400px) {
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+  .inner-box {
+    width: 100%;
+    max-width: 1300px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
   }
 }
 .center-nav {
@@ -87,7 +95,7 @@ const {
   @media screen and (max-width: 800px) {
     width: 200px;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     width: 150px;
   }
 }
@@ -115,7 +123,7 @@ const {
     padding: 0px 10px;
     height: 40px;
     line-height: 40px;
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 800px) {
       font-size: 20px;
     }
   }
@@ -128,8 +136,12 @@ const {
   align-items: center;
 
   .backend-admin {
-    padding: 0 30px 0 0;
-    font-size: 13px;
+    margin: 0 50px 0 0;
+    font-size: 12px;
+    width: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 </style>
