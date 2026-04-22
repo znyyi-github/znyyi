@@ -1,34 +1,47 @@
 <script setup lang="ts">
-import { useAppStore } from "@/store/app";
-const store = useAppStore();
+import { logout } from "@/api";
+import jpgUrl from "../assets/default.jpg?url";
+import { useUserStore } from "@/store/user";
+import { useI18n } from "vue-i18n";
+const store = useUserStore();
+const { t } = useI18n();
 
 const changeUserInfo = () => {};
-const logout = () => {};
+
+const logoutFn = async () => {
+  const { message } = await logout();
+  localStorage.removeItem("access_token");
+  store.updateIsLogin(false);
+
+  ElMessage({
+    message: t(message),
+    type: "success",
+    duration: 1000,
+  });
+};
 </script>
 <template>
-  <div id="UserPhoto">
+  <div class="UserPhoto">
     <el-popover
       placement="bottom"
-      :width="100"
       trigger="hover"
-      popper-class="userPhotoPopper"
       content="this is content, this is content, this is content"
     >
       <template #reference>
         <div
           class="img"
           :style="{
-            backgroundImage: `url(/${store.userInfo.photo})`,
+            backgroundImage: `url(${store.userInfo?.photo ? store.userInfo.photo : jpgUrl})`,
           }"
         ></div>
       </template>
 
       <!-- hover之后弹框中出现的内容 -->
       <div class="btn">
-        <!-- <el-button type="primary" size="small" @click="changeUserInfo"
+        <el-button type="primary" size="small" @click="changeUserInfo"
           >修改资料</el-button
-        > -->
-        <el-button type="danger" size="small" @click="logout"
+        >
+        <el-button type="danger" size="small" @click="logoutFn"
           >退出登录</el-button
         >
       </div>
@@ -37,7 +50,7 @@ const logout = () => {};
 </template>
 
 <style lang="scss" scoped>
-#UserPhoto {
+.UserPhoto {
   width: 40px;
   height: 40px;
   margin-top: 5px;
@@ -54,16 +67,8 @@ const logout = () => {};
     box-sizing: border-box;
   }
 }
-.btn {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  width: 80%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  .el-button {
-    margin: 0px;
-  }
+.el-button {
+  width: 100%;
+  margin: 0;
 }
 </style>

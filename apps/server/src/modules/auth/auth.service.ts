@@ -2,7 +2,6 @@ import { AccountService } from '../account/account.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import crypto from 'node:crypto';
 import type { LoginQuery, RegisterQuery } from '@znyyi/shared';
-import { ResponseDataImpl } from 'src/common/response-data';
 import { JwtService } from '@nestjs/jwt';
 import { AuthPayload } from './auth-data';
 import { Repository } from 'typeorm';
@@ -56,42 +55,34 @@ export class AuthService {
     return res;
   }
 
-  // 检测是否登录
-  // check(payload: AuthPayload): CheckResponse {
-  //   const expireTime = payload.exp!;
-  //   const currentTime = Math.floor(Date.now() / 1000);
-  //   const timeLeft = expireTime - currentTime;
-  //   if (timeLeft > 0 && timeLeft < REFRESH_THRESHOLD) {
-  //     return { needRefresh: true };
-  //   }
-  //   return { needRefresh: false };
-  // }
-
   // 登出
-  logout() {
-    const res = new ResponseDataImpl(null, '0', 'app.text.logout.sucess');
-    return res;
+  async logout(payload: AuthPayload) {
+    const { refreshToken } = payload;
+    await this.refreshTokenRepository.delete({ refresh_token: refreshToken });
   }
 
   // 刷新access-token
-  async refresh(payload: AuthPayload, token: string) {
-    const rt_data = await this.refreshTokenRepository.findOne({
+  async refreshAccessToken(payload: AuthPayload, refreshToken: string) {
+    const rtData = await this.refreshTokenRepository.findOne({
       where: {
-        refresh_token: token,
+        refresh_token: refreshToken,
         user: payload.user,
       },
     });
-    if (!rt_data) {
+    if (!rtData) {
       throw new UnauthorizedException(); //无rt 返回 401
     }
-    const expireTime = rt_data.exp;
-    const currentTime = Math.floor(Date.now() / 1000);
-    const timeLeft = expireTime - currentTime;
-    if (timeLeft < 0) {
-      await this.refreshTokenRepository.delete(rt_data._id);
+    if (this.checkExpireTime(rtData.exp)) {
+      await this.refreshTokenRepository.delete(rtData._id);
       throw new UnauthorizedException(); //rt过期 返回 401
     }
     const accessToken = await this.generateAccessToken(payload); // rt有效 刷新
     return accessToken;
+  }
+
+  // 检测exp是否过期（true:过期 false:未过期）
+  checkExpireTime(exp: number) {
+    const currentTime = Math.floor(Date.now() / 1000);
+    return exp < currentTime;
   }
 }

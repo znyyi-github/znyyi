@@ -1,7 +1,5 @@
 {
-    "liveServer.settings.port": 5501,
-    "editor.formatOnSave": true,
-    "cSpell.words": [
-        "znyyi"
-    ]
+  "liveServer.settings.port": 5501,
+  "editor.formatOnSave": true,
+  "cSpell.words": ["iconfont", "Streamable", "weixin", "znyyi"]
 }

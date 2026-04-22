@@ -1,5 +1,6 @@
-import "./style.css";
-import "./font.css";
+import "./assets/style/style.css";
+import "./assets/style/font.css";
+import "./assets/style/font/iconfont.css";
 import App from "./App.vue";
 import { ViteSSG } from "vite-ssg";
 import { routes } from "vue-router/auto-routes";

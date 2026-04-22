@@ -1,6 +1,6 @@
 import { ref, useTemplateRef } from "vue";
 import { login } from "../api";
-import { useAppStore } from "../store/app";
+import { useUserStore } from "../store/user";
 import { useI18n } from "vue-i18n";
 
 export interface LoginEmit {
@@ -16,7 +16,7 @@ export const useLogin = (emit: ReturnType<typeof defineEmits>) => {
   const loginForm = ref({ name: "", pwd: "" });
   const regForm = ref({ name: "", pwd: "", repwd: "" });
   const rules = {};
-  const store = useAppStore();
+  const store = useUserStore();
   const { t } = useI18n();
 
   const loginSubmit = async () => {
@@ -33,9 +33,7 @@ export const useLogin = (emit: ReturnType<typeof defineEmits>) => {
     closeLoginBox();
 
     store.updateUserInfo(res.data!);
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 1000);
+    store.updateIsLogin(true); // 设置isLogin
   };
   const regSubmit = async () => {};
 

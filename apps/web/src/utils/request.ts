@@ -1,6 +1,7 @@
 import axios from "axios";
 import { i18n } from "./i18n";
 import type { ResponseData } from "@znyyi/shared";
+import { eventBus } from "./event-bus";
 const HEADER_X_ACCESS_TOKEN = "x-access-token";
 
 export const instance = axios.create({
@@ -23,15 +24,25 @@ instance.interceptors.response.use(
         type: "error",
         duration: 1000,
       });
+      return Promise.reject(data);
     } else {
       const accessToken = response.headers[HEADER_X_ACCESS_TOKEN];
-      if (accessToken)
+      if (accessToken) {
         // 前端将access_token存入localStorage
         localStorage.setItem("access_token", accessToken);
+      }
     }
     return response;
   },
   function (err) {
+    if (err.response.status === 401) {
+      eventBus.emit("http401");
+      ElMessage({
+        message: i18n.global.t("error.401"),
+        type: "error",
+        duration: 1000,
+      });
+    }
     return Promise.reject(err);
   },
 );

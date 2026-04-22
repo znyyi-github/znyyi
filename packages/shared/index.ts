@@ -7,6 +7,7 @@ export interface LoginResponse {
   photo: string;
 }
 export type RegisterQuery = LoginQuery;
+export type UserProfileResponse = LoginResponse;
 export interface ResponseData<T = unknown> {
   code: string;
   message: string;

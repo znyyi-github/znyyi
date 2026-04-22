@@ -1,8 +1,11 @@
 import { SetMetadata } from '@nestjs/common';
 
+// AuthPayload：jwt 解码后的json对象
 export interface AuthPayload {
   user: string;
   exp?: number;
+  accessToken?: string; // 例外，为了存储新的accessToken
+  refreshToken?: string; // 例外，为了传递refreshToken
 }
 
 export const CONFIG_JWT_SECRET = 'JWT_SECRET';

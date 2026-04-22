@@ -35,27 +35,10 @@ export class AuthController {
     return this.authService.register(query);
   }
 
-  // @Get('check')
-  // check(@Req() req: Request) {
-  //   const data = this.authService.check(req.user as AuthPayload);
-  //   return ResponseDataImpl.buildSuccess(data);
-  // }
-
   @Post('logout')
-  logout() {
-    return this.authService.logout();
-  }
-
-  @AuthPublic()
-  @Post('refresh')
-  async refresh(
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const token = req.cookies[COOKIE_REFRESH_TOKEN] as string;
-    const data = await this.authService.refresh(req.user as AuthPayload, token);
-    writeTokens(res, data, token);
-    return ResponseDataImpl.buildSuccess();
+  async logout(@Req() req: Request) {
+    await this.authService.logout(req.user as AuthPayload);
+    return ResponseDataImpl.buildSuccess(null, 'app.text.logout.sucess');
   }
 }
 

@@ -8,7 +8,9 @@
     "serve": "pnpm --filter client serve",
     "build": "pnpm --filter client build",
     "prepare": "husky && git config core.ignorecase false",
-    "cz": "czg"
+    "cz": "czg",
+    "test-ls": "lint-staged",
+    "lint": "eslint . --cache --ignore-pattern **/dist --ignore-pattern apps/web/src/assets/style/font/iconfont.js"
   },
   "keywords": [],
   "author": "",

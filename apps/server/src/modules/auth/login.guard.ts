@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AcceptedDataException } from 'src/common/accepted-data-exception';
 
@@ -8,6 +12,8 @@ export class LoginAuthGuard extends AuthGuard('login') {
     err: unknown,
     user: TUser,
     info: { message?: string },
+    context: ExecutionContext,
+    status?: any,
   ) {
     if (err || !user) {
       // 检查是否是因为字段缺失导致的
@@ -18,6 +24,6 @@ export class LoginAuthGuard extends AuthGuard('login') {
         (err as Error) || new UnauthorizedException('app.text.login_failed')
       );
     }
-    return user;
+    return super.handleRequest<TUser>(err, user, info, context, status);
   }
 }
