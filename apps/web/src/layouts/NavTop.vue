@@ -116,7 +116,8 @@ const {
       color: #409eff;
     }
   }
-  .login-btn {
+  .login-btn,
+  .user-info {
     margin-left: 12px;
   }
 }

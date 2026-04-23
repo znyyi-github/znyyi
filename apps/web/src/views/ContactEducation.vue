@@ -85,7 +85,7 @@
     li {
       display: flex;
       align-items: center;
-      padding: 8px 0;
+      padding: 6px 0;
 
       .icon-wrap {
         width: 40px;
@@ -105,7 +105,6 @@
       }
     }
     .education {
-      align-items: flex-start;
       .school {
         font-weight: 600;
       }

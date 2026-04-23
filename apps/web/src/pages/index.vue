@@ -16,6 +16,53 @@ useHead({
 
 const { t } = useI18n();
 
+interface ExperienceItem {
+  key: string;
+  icon: string;
+  title: string;
+  badge?: string;
+  time: string;
+  tag: string;
+  descs: string[];
+}
+
+const experienceList: ExperienceItem[] = [
+  {
+    key: "project1",
+    icon: "📚",
+    title: "index.exp.project1.title",
+    badge: "index.exp.project1.badge",
+    time: "index.exp.project1.time",
+    tag: "index.exp.project1.tag",
+    descs: ["index.exp.project1.desc1", "index.exp.project1.desc2"],
+  },
+  {
+    key: "huawei",
+    icon: "🏢",
+    title: "index.exp.huawei.title",
+    time: "index.exp.huawei.time",
+    tag: "index.exp.huawei.tag",
+    descs: [
+      "index.exp.huawei.desc1",
+      "index.exp.huawei.desc2",
+      "index.exp.huawei.desc3",
+      "index.exp.huawei.desc4",
+    ],
+  },
+  {
+    key: "game",
+    icon: "🎮",
+    title: "index.exp.game.title",
+    time: "index.exp.game.time",
+    tag: "index.exp.game.tag",
+    descs: [
+      "index.exp.game.desc1",
+      "index.exp.game.desc2",
+      "index.exp.game.desc3",
+    ],
+  },
+];
+
 const contactForm = ref({
   name: "",
   email: "",
@@ -74,56 +121,25 @@ const resetForm = () => {
     <div class="experience common">
       <p class="title">{{ t("index.experience_title") }}</p>
       <div class="experience-list">
-        <!-- 个人博客项目 -->
-        <div class="experience-item">
+        <div
+          class="experience-item"
+          v-for="exp in experienceList"
+          :key="exp.key"
+        >
           <div class="exp-dot"></div>
           <div class="exp-header">
             <div class="exp-title-wrapper">
-              <span class="exp-icon">📚</span>
-              <p class="exp-title">{{ t("index.exp.project1.title") }}</p>
-              <span class="exp-badge">{{ t("index.exp.project1.badge") }}</span>
+              <span class="exp-icon">{{ exp.icon }}</span>
+              <p class="exp-title">{{ t(exp.title) }}</p>
+              <span v-if="exp.badge" class="exp-badge">{{ t(exp.badge) }}</span>
             </div>
-            <span class="exp-time">{{ t("index.exp.project1.time") }}</span>
+            <span class="exp-time">{{ t(exp.time) }}</span>
           </div>
-          <div class="exp-tag">{{ t("index.exp.project1.tag") }}</div>
+          <div class="exp-tag">{{ t(exp.tag) }}</div>
           <div class="exp-content">
-            <p class="exp-desc">{{ t("index.exp.project1.desc1") }}</p>
-            <p class="exp-desc">{{ t("index.exp.project1.desc2") }}</p>
-          </div>
-        </div>
-        <!-- 华为 -->
-        <div class="experience-item">
-          <div class="exp-dot"></div>
-          <div class="exp-header">
-            <div class="exp-title-wrapper">
-              <span class="exp-icon">🏢</span>
-              <p class="exp-title">{{ t("index.exp.huawei.title") }}</p>
-            </div>
-            <span class="exp-time">{{ t("index.exp.huawei.time") }}</span>
-          </div>
-          <div class="exp-tag">{{ t("index.exp.huawei.tag") }}</div>
-          <div class="exp-content">
-            <p class="exp-desc">{{ t("index.exp.huawei.desc1") }}</p>
-            <p class="exp-desc">{{ t("index.exp.huawei.desc2") }}</p>
-            <p class="exp-desc">{{ t("index.exp.huawei.desc3") }}</p>
-            <p class="exp-desc">{{ t("index.exp.huawei.desc4") }}</p>
-          </div>
-        </div>
-        <!-- ZYI Game -->
-        <div class="experience-item">
-          <div class="exp-dot"></div>
-          <div class="exp-header">
-            <div class="exp-title-wrapper">
-              <span class="exp-icon">🎮</span>
-              <p class="exp-title">{{ t("index.exp.game.title") }}</p>
-            </div>
-            <span class="exp-time">{{ t("index.exp.game.time") }}</span>
-          </div>
-          <div class="exp-tag">{{ t("index.exp.game.tag") }}</div>
-          <div class="exp-content">
-            <p class="exp-desc">{{ t("index.exp.game.desc1") }}</p>
-            <p class="exp-desc">{{ t("index.exp.game.desc2") }}</p>
-            <p class="exp-desc">{{ t("index.exp.game.desc3") }}</p>
+            <p v-for="(desc, dIdx) in exp.descs" :key="dIdx" class="exp-desc">
+              {{ t(desc) }}
+            </p>
           </div>
         </div>
       </div>
@@ -172,15 +188,15 @@ const resetForm = () => {
     padding: 15px 15px 30px;
     margin-bottom: 10px;
     p.title {
-      @media screen and (max-width: 380px) {
-        font-size: 20px;
-      }
       margin-bottom: 10px;
       font-size: 30px;
       letter-spacing: 3px;
       padding-top: 10px;
       font-family: "Quicksand";
       font-weight: 600;
+      @media screen and (max-width: 600px) {
+        font-size: 20px;
+      }
     }
     p.des {
       padding-bottom: 20px;
@@ -208,7 +224,7 @@ const resetForm = () => {
       &::before {
         content: "";
         position: absolute;
-        left: 33px;
+        left: 28px;
         top: 20px;
         bottom: 20px;
         width: 2px;
@@ -223,7 +239,7 @@ const resetForm = () => {
       .experience-item {
         position: relative;
         margin-bottom: 35px;
-        padding-left: 45px;
+        padding-left: 35px;
         transition: transform 0.3s ease;
         &:hover {
           .exp-dot {
@@ -239,7 +255,7 @@ const resetForm = () => {
         }
         .exp-dot {
           position: absolute;
-          left: 0px;
+          left: -5px;
           top: 6px;
           width: 14px;
           height: 14px;
@@ -273,19 +289,22 @@ const resetForm = () => {
               color: #333;
               font-family: "Quicksand";
               margin: 0;
-              @media screen and (max-width: 380px) {
+              @media screen and (max-width: 600px) {
                 font-size: 16px;
               }
             }
             .exp-badge {
               background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
               color: #fff;
-              padding: 2px 10px;
+              padding: 2px 8px;
               border-radius: 12px;
               font-size: 12px;
               font-weight: 600;
               font-family: "Quicksand";
               letter-spacing: 1px;
+              @media screen and (max-width: 600px) {
+                font-size: 10px;
+              }
             }
           }
           .exp-time {
@@ -293,7 +312,7 @@ const resetForm = () => {
             font-size: 13px;
             font-family: "Quicksand";
             white-space: nowrap;
-            @media screen and (max-width: 380px) {
+            @media screen and (max-width: 600px) {
               font-size: 12px;
             }
           }

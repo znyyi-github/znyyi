@@ -22,11 +22,7 @@ const logoutFn = async () => {
 </script>
 <template>
   <div class="UserPhoto">
-    <el-popover
-      placement="bottom"
-      trigger="hover"
-      content="this is content, this is content, this is content"
-    >
+    <el-popover placement="bottom" trigger="hover" :teleported="false">
       <template #reference>
         <div
           class="img"
@@ -36,7 +32,6 @@ const logoutFn = async () => {
         ></div>
       </template>
 
-      <!-- hover之后弹框中出现的内容 -->
       <div class="btn">
         <el-button type="primary" size="small" @click="changeUserInfo"
           >修改资料</el-button
