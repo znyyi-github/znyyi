@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -6,10 +8,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { FileModule } from './modules/file/file.module';
+import { ArticleModule } from './modules/article/article.module';
 @Module({
   imports: [
     // 加载环境变量（全局生效）
     ConfigModule.forRoot({ isGlobal: true }),
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'public'),
+      serveRoot: '/static',
+    }),
     // 配置 TypeORM 连接 MongoDB（使用环境变量动态配置）
     TypeOrmModule.forRootAsync({
       useFactory: (configService: ConfigService) => ({
@@ -24,6 +31,7 @@ import { FileModule } from './modules/file/file.module';
     UserModule,
     AuthModule,
     FileModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

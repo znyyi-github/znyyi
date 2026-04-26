@@ -224,8 +224,8 @@ const resetForm = () => {
       &::before {
         content: "";
         position: absolute;
-        left: 28px;
-        top: 20px;
+        left: 24px;
+        top: 28px;
         bottom: 20px;
         width: 2px;
         background: linear-gradient(
@@ -238,33 +238,73 @@ const resetForm = () => {
       }
       .experience-item {
         position: relative;
-        margin-bottom: 35px;
-        padding-left: 35px;
-        transition: transform 0.3s ease;
+        margin: 0 0 24px 28px;
+        padding: 20px 24px;
+        padding-left: 40px;
+        background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+        border-radius: 12px;
+        border: 1px solid rgba(191, 226, 230, 0.2);
+        box-shadow:
+          0 4px 16px rgba(102, 175, 233, 0.08),
+          0 2px 8px rgba(0, 0, 0, 0.04);
+        transition: all 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: cardSlideIn 0.6s ease forwards;
+
+        &:nth-child(1) {
+          animation-delay: 0.1s;
+        }
+        &:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        &:nth-child(3) {
+          animation-delay: 0.3s;
+        }
+
         &:hover {
+          transform: translateY(-8px) scale(1.02);
+          box-shadow:
+            0 12px 32px rgba(102, 175, 233, 0.18),
+            0 4px 16px rgba(102, 126, 234, 0.12);
+          border-color: rgba(102, 175, 233, 0.4);
+          background: linear-gradient(135deg, #ffffff 0%, #f0f7f8 100%);
+
           .exp-dot {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             box-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
-            transform: scale(1.2);
+            transform: scale(1.3);
+          }
+
+          .exp-icon {
+            transform: scale(1.15) rotate(5deg);
+          }
+
+          .exp-badge {
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+          }
+
+          .exp-tag {
+            background: linear-gradient(90deg, #e0f4f5 0%, #d0eef0 100%);
+            border-left-width: 4px;
           }
         }
+
         &:last-child {
           margin-bottom: 0;
-          padding-bottom: 0;
-          border-bottom: none;
         }
+
         .exp-dot {
           position: absolute;
-          left: -5px;
-          top: 6px;
+          left: -38px;
+          top: 0px;
           width: 14px;
           height: 14px;
-          background: #bfe2e6;
+          background: linear-gradient(135deg, #bfe2e6 0%, #a0d8de 100%);
           border: 3px solid #fff;
           border-radius: 50%;
-          z-index: 1;
-          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-          transition: all 0.3s ease;
+          box-shadow: 0 2px 8px rgba(102, 175, 233, 0.25);
+          transition: all 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .exp-header {
           display: flex;
@@ -282,6 +322,8 @@ const resetForm = () => {
             .exp-icon {
               font-size: 22px;
               line-height: 1;
+              transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+              display: inline-block;
             }
             .exp-title {
               font-size: 18px;
@@ -296,14 +338,17 @@ const resetForm = () => {
             .exp-badge {
               background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
               color: #fff;
-              padding: 2px 8px;
-              border-radius: 12px;
+              padding: 3px 10px;
+              border-radius: 14px;
               font-size: 12px;
               font-weight: 600;
               font-family: "Quicksand";
               letter-spacing: 1px;
+              box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+              transition: all 0.3s ease;
               @media screen and (max-width: 600px) {
                 font-size: 10px;
+                padding: 2px 8px;
               }
             }
           }
@@ -322,12 +367,13 @@ const resetForm = () => {
           background: #f0f7f8;
           border-left: 3px solid #bfe2e6;
           color: #555;
-          padding: 4px 12px;
-          border-radius: 0 4px 4px 0;
+          padding: 5px 14px;
+          border-radius: 0 6px 6px 0;
           font-size: 13px;
           font-family: "Quicksand";
           margin-bottom: 12px;
           font-weight: 500;
+          transition: all 0.16s ease;
         }
         .exp-content {
           .exp-desc {
@@ -348,6 +394,21 @@ const resetForm = () => {
               color: #bfe2e6;
               font-size: 18px;
               font-weight: bold;
+              animation: bulletFade 0.5s ease forwards;
+              opacity: 0;
+            }
+
+            &:nth-child(1)::before {
+              animation-delay: 0.2s;
+            }
+            &:nth-child(2)::before {
+              animation-delay: 0.3s;
+            }
+            &:nth-child(3)::before {
+              animation-delay: 0.4s;
+            }
+            &:nth-child(4)::before {
+              animation-delay: 0.5s;
             }
           }
         }
@@ -383,6 +444,67 @@ const resetForm = () => {
             box-shadow: 0 3px 5px #bbb;
           }
         }
+      }
+    }
+  }
+}
+
+/* 卡片进入动画 */
+@keyframes cardSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 点状指示器脉动动画 */
+@keyframes dotPulse {
+  0%,
+  100% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+}
+
+/* 项目符号渐入动画 */
+@keyframes bulletFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  .experience .experience-list {
+    padding: 8px 16px;
+
+    .experience-item {
+      padding: 16px 18px;
+      padding-left: 32px;
+      margin-bottom: 16px;
+
+      &:hover {
+        transform: translateY(-4px) scale(1.01);
+      }
+
+      .exp-dot {
+        left: -4px;
+        top: 18px;
+        width: 12px;
+        height: 12px;
       }
     }
   }

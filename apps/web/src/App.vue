@@ -57,6 +57,7 @@ body {
   margin: 60px auto 0;
   padding: 0 8px;
   max-width: 1300px;
+  box-sizing: border-box;
   .hidden {
     position: fixed;
     top: 0;

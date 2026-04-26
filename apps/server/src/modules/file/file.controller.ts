@@ -5,10 +5,10 @@ import { AuthPublic } from '../auth/auth-data';
 @AuthPublic()
 @Controller('file')
 export class FileController {
-  constructor(private readonly cvService: FileService) {}
+  constructor(private readonly fileService: FileService) {}
 
   @Get('cv')
   downloadCv(): StreamableFile {
-    return this.cvService.downloadCv();
+    return this.fileService.downloadCv();
   }
 }
