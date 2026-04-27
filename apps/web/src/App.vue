@@ -47,7 +47,7 @@ body {
   background:    /* 双背景图片 */
     url("./assets/img/bg/bg-left.png") no-repeat left 50px,
     url("./assets/img/bg/bg-right.png") no-repeat right 50px;
-  background-color: #f2f2f2;
+  background-color: #f0f0f0;
 }
 </style>
 <style lang="scss" scoped>

@@ -94,6 +94,9 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .article-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
   flex: 1;
   background-color: #fff;
   color: #333;
@@ -101,6 +104,7 @@ onMounted(() => {
   padding: 30px;
   box-shadow: 0 0 4px #ddd;
   min-height: 500px;
+  overflow-x: hidden;
 }
 
 .article-content-wrapper {
@@ -142,13 +146,16 @@ onMounted(() => {
 
 .markdown-body {
   box-sizing: border-box;
-  min-width: 200px;
-  max-width: 980px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0;
   background-color: #fff;
   color: #333;
   color-scheme: light;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .markdown-body h1,
@@ -172,6 +179,9 @@ onMounted(() => {
 }
 
 .markdown-body pre {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
   background-color: #f6f8fa;
   border: 1px solid #dce4ea;
   border-radius: 8px;
@@ -188,6 +198,21 @@ onMounted(() => {
 
 .markdown-body code {
   background-color: #f6f8fa;
+}
+
+.markdown-body :deep(img),
+.markdown-body :deep(video),
+.markdown-body :deep(canvas),
+.markdown-body :deep(svg),
+.markdown-body :deep(table),
+.markdown-body :deep(iframe) {
+  max-width: 100%;
+}
+
+.markdown-body :deep(table) {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
 }
 
 @media (max-width: 767px) {
